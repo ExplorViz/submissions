@@ -1,0 +1,199 @@
+html, body {
+  overflow: hidden;
+  height: 100vh;
+}
+
+body > .ember-view {
+  height: 100%;
+  @extend .d-flex;
+  @extend .flex-column;
+}
+
+.main-content {
+  overflow: hidden;
+  @extend .ml-3;
+  @extend .mr-3;
+  @extend .mt-5;
+  @extend .mb-3;
+  @extend .flex-grow-1;
+  @extend .d-flex;
+  @extend .flex-column;
+}
+
+.main-content > .row {
+  @extend .flex-grow-1;
+}
+
+#vizspace {
+  @extend .d-flex;
+  @extend .flex-column;
+  max-height: 100%;
+}
+
+#rendering {
+  @extend .flex-grow-1;
+  max-height: 100%;
+  position: relative;
+}
+
+.canvasViz {
+  height: 100%;
+  width: 100%;
+}
+
+.no-margin{
+  margin: 0px;
+}
+
+.hide {
+  display: none !important;
+}
+
+#configuration-tab > .tab-content > .tab-pane.active {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.explorviz-visualization-navbar {
+  @extend .mb-3;
+}
+
+//Additional classes
+
+.scrollable-extension {
+  max-height: 40%;
+}
+
+.container-shadow:hover {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+}
+
+.container-word-wrap {
+  word-break: break-word;
+}
+
+.cytoscape-container {
+  @extend .d-flex;
+  @extend .flex-grow-1;
+}
+
+.scroll-container {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  max-height: 100%;
+}
+
+.no-horizontal-scroll {
+  resize: vertical;
+}
+
+.darker-accordion-header {
+  background-color: #e8e8e8 !important;
+}
+
+.relative {
+  position: relative;
+}
+
+.explorVizModal {
+  background-color: #8e8e8e;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  cursor: wait;
+  box-shadow: 5px 10px #888888;
+  border-radius: 10px;
+}
+
+.inline {
+  display: inline;
+}
+
+.tooltip-component > a {
+  color: #777;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 5px;
+  background-color: #d2d2d2;
+}
+
+::-webkit-scrollbar-thumb {
+  background:#989898; 
+  border-radius: 5px;
+}
+
+
+// Needed for firefox, since the scrollbar might else overlap the options
+li.ember-power-select-option {
+  padding-left: 8px;
+  padding-right: 22px;
+}
+
+.removecaret.dropdown-toggle::after {
+  display: none!important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #212529;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+svg.octicon + span {
+  margin-left: 5px;
+}
+
+svg.octicon {
+  fill: currentColor;
+}
+
+.d-flex-center {
+  align-items: center;
+  display: flex;
+}
+
+.d-contents {
+  display: contents!important;
+}
+
+.btn-exp-login {
+  color: #64b5f6;
+  border-color: #64b5f6;
+}
+
+.btn-exp-login:hover {
+  background-color: #9be7ff;
+  border-color: #9be7ff;
+}
+
+@mixin centerSpinners() {
+  @for $i from 1 through 5 {
+    .spinner-center-#{$i} {
+      @extend .spinner-border;
+      position: absolute;
+      top: calc(50% - #{$i/2}rem);
+      left: calc(50% - #{$i/2}rem);
+      width: #{$i}rem;
+      height: #{$i}rem;
+    }
+  }
+}
+
+* { @include centerSpinners(); }
+
+.spinner-center-3-relative {
+  @extend .spinner-border;
+  width: 3rem;
+  height: 3rem;
+}

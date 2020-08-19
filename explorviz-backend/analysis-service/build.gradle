@@ -1,0 +1,79 @@
+plugins {
+	id "application"
+	id "com.github.johnrengelman.shadow" version "5.1.0"
+	id "com.github.spotbugs" version "1.6.10"
+	id "maven"
+}
+
+// Force new Dependencies 
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+repositories {
+  maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+}
+
+dependencies {
+  // explorviz-kieker-adapter
+  implementation project(':kiekeradapter')
+
+  // Teetime Pipe and Filter Framework
+  implementation group: 'net.sourceforge.teetime', name: 'teetime', version: '3.0-SNAPSHOT'	
+  implementation group: 'net.sourceforge.teetime-stages', name: 'teetime-stages', version: '3.0-SNAPSHOT'
+	
+  // Kieker Monitoring Framework
+  implementation group: 'net.kieker-monitoring', name: 'kieker', version: '1.14-SNAPSHOT'
+}
+
+// disable integration tests, since there are none
+integrationTest.enabled = false
+
+// disable api tests, since there are none
+apiTest.enabled = false
+
+assemble.dependsOn shadowJar
+jar.enabled = false
+
+jar {
+  manifest {
+    attributes(
+      'Main-Class': 'net.explorviz.analysis.Main'
+    )
+  }
+}
+
+application {
+    mainClassName = 'net.explorviz.analysis.Main'
+}
+
+shadowJar {
+  baseName = "explorviz-${project.name}"
+  classifier = null
+}
+
+spotbugs {
+  excludeFilter = file("../conf/spotbugs-exclude-filter.xml")
+  reportLevel = "low"
+  effort = "max"
+  ignoreFailures = true
+  toolVersion = '3.1.7'
+}
+
+// Per default XML reports for SpotBugs are generated
+// Include this to generate HTML reports
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+  reports {
+    // Either HTML or XML reports can be activated
+    html.enabled true
+    xml.enabled false
+  }
+}
+
+task spotbugs {
+  group 'Quality Assurance'
+  description 'Run SpotBugs'
+  
+  dependsOn 'spotbugsMain'
+  dependsOn 'spotbugsTest'
+}

@@ -1,0 +1,30 @@
+#dataselection {
+  display: flex;
+  @extend .flex-row;
+}
+
+.sidebar-component-title {
+  position: relative;
+  margin-top: 20px;
+  left: 50%;
+  transform: translateX(-50%); 
+  display:inline-block;
+}
+
+.sidebar-component-close {
+  float: right;
+}
+
+.th-btn{
+  padding-top: 0px;
+  padding-bottom: 4px;
+  padding-left: 2px;
+  padding-right: 2px;
+  line-height: 1;
+  text-align: center;
+}
+
+.red-hover:hover{
+  color: red !important;
+  text-decoration: none;
+}
